@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}">
 </head>
 <body>
@@ -9,66 +10,23 @@
 </div>
 <!-- END nav -->
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-            <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login <i class="ion-ios-arrow-forward"></i></span></p>
-                <h1 class="mb-3 bread">Admin Panel</h1>
+        <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+            <div class="col-lg-8 ftco-animate">
+                <div class="text w-100 text-center mb-md-5 pb-md-5">
+                    <h1 class="mb-4">
+                        Hmmm... Looks like you took a wrong turn!
+                    </h1>
+                    <h1 class="mb-4">
+                        Try the <a th:href="@{/}">home</a> page
+                    </h1>
+                </div>
             </div>
         </div>
     </div>
-</section>
-
-<section class="ftco-section contact-section">
-    <div class="container">
-        <div class="row d-flex mb-5 contact-info">
-            <div class="col-md-8 block-9 mb-md-5">
-                <div style="color: red;" th:text="${removeAdminError}"></div>
-                <div style="color: red;" th:text="${makeAdminError}"></div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.username}"></td>
-                        <td>
-<!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().name()}"></span>-->
-<!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().getDisplayValue()}"></span>-->
-
-                            <span th:each="role, iterStat : ${user.roles}">
-                                <span th:text="${role.getRole().getDisplayValue()}"></span>
-                                <span th:if="${!iterStat.last}">, </span>
-                            </span>
-<!--                            <span th:if="${user.roles.contains()}" th:text="ÄDMIN"></span>-->
-<!--                            <span th:if="${user.roles.contains('USER')}" th:text="USER"></span>-->
-                        </td>
-                        <td>
-                            <form th:action="@{/make-admin}" method="post">
-                                <input type="hidden" name="username" th:value="${user.username}" />
-                                <button type="submit" class="btn btn-primary">Make Admin</button>
-                            </form>
-                        </td>
-                        <td>
-                            <form th:action="@{/remove-admin}" method="post">
-                                <input type="hidden" name="username" th:value="${user.username}" />
-                                <button type="submit" class="btn btn-danger">Remove Admin</button>
-                            </form>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
+</div>
 
 
 <footer class="ftco-footer ftco-bg-dark ftco-section">
@@ -122,14 +80,14 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
+        <!--        <div class="row">-->
+        <!--          <div class="col-md-12 text-center">-->
 
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-            </div>
-        </div>
+        <!--            <p>&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+        <!--  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+        <!--  &lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;</p>-->
+        <!--          </div>-->
+        <!--        </div>-->
     </div>
 </footer>
 

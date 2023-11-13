@@ -2,6 +2,8 @@ package com.example.carbook.web;
 
 import com.example.carbook.model.dto.UserLoginBindingModel;
 import com.example.carbook.model.dto.UserRegisterBindingModel;
+import com.example.carbook.model.entity.UserEntity;
+import com.example.carbook.service.RoleService;
 import com.example.carbook.service.UserService;
 import com.example.carbook.service.impl.LoggedUser;
 import jakarta.validation.Valid;
@@ -11,7 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -19,9 +24,12 @@ public class UserController {
     private final UserService userService;
     private final LoggedUser loggedUser;
 
-    public UserController(UserService userService, LoggedUser loggedUser) {
+    private final RoleService roleService;
+
+    public UserController(UserService userService, LoggedUser loggedUser, RoleService roleService) {
         this.userService = userService;
         this.loggedUser = loggedUser;
+        this.roleService = roleService;
     }
 
     @GetMapping("/login")
@@ -111,5 +119,35 @@ public class UserController {
 //
 //        return new ModelAndView("redirect:/");
 //    }
+    @GetMapping("/admin-panel")
+    public String showAdminPanel(Model model) {
+        List<UserEntity> users = userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin-panel";
+    }
 
+    @PostMapping("/make-admin")
+    public String makeAdmin(@RequestParam String username, Model model) {
+        if (!userService.isAdmin(username)) {
+            userService.makeAdmin(username);
+            return "redirect:/admin-panel";
+        } else {
+            model.addAttribute("makeAdminError", "User is already an admin");
+            List<UserEntity> users = userService.getAllUsers();
+            model.addAttribute("users", users);
+        }
+        return "admin-panel";
+    }
+    @PostMapping("/remove-admin")
+    public String removeAdmin(@RequestParam String username, Model model) {
+        if (userService.isAdmin(username)) {
+            userService.removeAdmin(username);
+            return "redirect:/admin-panel";
+        } else {
+           model.addAttribute("removeAdminError", "User is not an admin");
+            List<UserEntity> users = userService.getAllUsers();
+            model.addAttribute("users", users);
+            return "admin-panel";
+        }
+    }
 }

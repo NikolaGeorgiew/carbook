@@ -25,7 +25,7 @@ public class SecurityConfiguration {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         //Allow anyone to see the home page, the registration page,login page, about page, contact page
                         .requestMatchers("/", "/login", "/register", "/about", "/contact", "login-error","/blog").permitAll()
-                        .requestMatchers("/services").hasRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/services", "/admin-panel").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated
                         .anyRequest().authenticated()
 

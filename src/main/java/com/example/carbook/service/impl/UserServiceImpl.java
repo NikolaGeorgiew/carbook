@@ -1,16 +1,17 @@
 package com.example.carbook.service.impl;
 
-import com.example.carbook.model.dto.UserLoginBindingModel;
 import com.example.carbook.model.dto.UserRegisterBindingModel;
 import com.example.carbook.model.entity.UserEntity;
 import com.example.carbook.model.entity.UserRoleEntity;
 import com.example.carbook.model.enums.UserRoleEnum;
 import com.example.carbook.repo.UserRepository;
+import com.example.carbook.service.RoleService;
 import com.example.carbook.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,12 +19,15 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final RoleService roleService;
+
     //private final LoggedUser loggedUser;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         //this.loggedUser = loggedUser;
+        this.roleService = roleService;
     }
 
     @Override
@@ -53,6 +57,48 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void makeAdmin(String username) {
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+
+        if (user != null) {
+            UserRoleEntity adminRole = roleService.findByRole(UserRoleEnum.ADMIN);
+            if (adminRole != null && !user.getRoles().contains(adminRole)) {
+                user.getRoles().add(adminRole);
+                userRepository.save(user);
+            }
+        }
+
+    }
+
+    @Override
+    public void removeAdmin(String username) {
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+
+        if (user != null) {
+            UserRoleEntity adminRole = roleService.findByRole(UserRoleEnum.ADMIN);
+            if (adminRole != null) {
+                user.getRoles().remove(adminRole);
+                userRepository.save(user);
+            }
+        }
+    }
+
+    @Override
+    public boolean isAdmin(String username) {
+        UserEntity user = userRepository.findByUsername(username).orElse(null);
+        if (user != null) {
+            UserRoleEntity adminRole = roleService.findByRole(UserRoleEnum.ADMIN);
+            return adminRole != null && user.getRoles().contains(adminRole);
+        }
+        return false;
     }
 
 //    @Override
