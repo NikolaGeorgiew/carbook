@@ -7,11 +7,12 @@ import com.example.carbook.model.enums.UserRoleEnum;
 import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.RoleService;
 import com.example.carbook.service.UserService;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,14 +21,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final RoleService roleService;
+    private final ModelMapper modelMapper;
 
     //private final LoggedUser loggedUser;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         //this.loggedUser = loggedUser;
         this.roleService = roleService;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -42,19 +45,28 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        UserEntity user = new UserEntity();
 
-        user.setEmail(userRegisterBindingModel.getEmail());
-        user.setUsername(userRegisterBindingModel.getUsername());
+//        UserEntity user = new UserEntity();
+//
+//        user.setEmail(userRegisterBindingModel.getEmail());
+//        user.setUsername(userRegisterBindingModel.getUsername());
+//        user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
+        UserEntity user = modelMapper.map(userRegisterBindingModel,UserEntity.class);
+
         user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
 
-//        if (userRepository.count() == 0) {
-//            user.setRole(UserRoleEnum.ADMIN);
-//        } else  {
-//            user.setRole(UserRoleEnum.USER);
-//        }
+        UserRoleEntity userRoleEntity = new UserRoleEntity();
+        userRoleEntity.setRole(UserRoleEnum.USER);
+
+        user.setRoles(List.of(userRoleEntity));
 
         userRepository.save(user);
+
+//        applicationEventPublisher.publishEvent(new UserRegisteredEvent(
+//                "UserService",
+//                userRegisterBindingModel.getEmail(),
+//                userRegisterBindingModel.getUsername()
+//        ));
 
         return true;
     }

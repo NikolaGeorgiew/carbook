@@ -25,27 +25,26 @@
     <div class="container">
         <div class="row d-flex mb-5 contact-info">
             <div class="col-md-8 block-9 mb-md-5">
-                <form th:action="@{/login}"
-                      th:method="POST"
-                      th:object="${userLoginBindingModel}"
+                <form   th:method="POST"
+                        th:action="@{/login}"
                       class="bg-light p-5 contact-form">
 
-                    <div th:if="${hasLoginError}"
-                         th:text="'Incorrect username or password'"
-                         class="text-danger">Incorrect username or password!</div>
-
 
                     <div class="form-group">
-                        <input th:field="*{username}"
-                               th:errorclass="bg-danger"
+                        <input value="username"
+                               id="username"
                                name="username"
-                                type="text" class="form-control" placeholder="Username">
+                               th:value="${username}"
+                               type="text"
+                               class="form-control"
+                               placeholder="Username">
                     </div>
                     <div class="form-group">
-                        <input th:field="*{password}"
-                               th:errorclass="bg-danger"
+                        <input value="password"
+                               id="password"
                                name="password"
-                                type="text" class="form-control" placeholder="Password">
+                               type="password"
+                               class="form-control" placeholder="Password">
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <input type="submit" value="Login" class="btn btn-primary py-3 px-5">-->
@@ -54,6 +53,18 @@
                     <div class="form-group">
                         <button type="submit" value="Login" class="btn btn-primary py-3 px-5">Login</button>
                     </div>
+                    <div class="form-group">
+                        <label for="rememberme" class="text-white font-weight-bold">Remember me</label>
+                        <input id="rememberme"
+                               name="rememberme"
+                               type="checkbox"
+                               class="form-control"/>
+
+                    </div>
+
+                    <div th:if="${bad_credentials}"
+                         th:text="'Incorrect username or password'"
+                         class="text-danger">Incorrect username or password!</div>
 
                 </form>
 

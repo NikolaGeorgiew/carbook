@@ -1,7 +1,7 @@
 insert into users (id,username,email,password)
 values
-    (1,'admin','admin@admin.com','$2a$10$7LQTn4O1c8U/QujZWPn6weuHi2TgWpVHcrK1XHEhPzyNxEfOwd.J2'),
-    (2,'user','user@user.com', '$2a$10$7LQTn4O1c8U/QujZWPn6weuHi2TgWpVHcrK1XHEhPzyNxEfOwd.J2');
+    (1,'admin','admin@admin.com', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151'),
+    (2,'user','user@user.com', '95c1933b8ffe84f085f2839899d1673260be58dbd9c2c787ac35515805502c996417596dae9a92880aaa50a046fc7151');
 
 insert into roles (id,role)
 values (1,'ADMIN'),

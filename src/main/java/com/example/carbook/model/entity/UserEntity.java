@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +25,12 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "addedBy")
-    private Set<TripEntity> trips;
+    private LocalDateTime lastLogin;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+//    @OneToMany(mappedBy = "addedBy")
+//    private Set<TripEntity> trips;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -64,13 +67,6 @@ public class UserEntity extends BaseEntity{
         this.password = password;
     }
 
-    public Set<TripEntity> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(Set<TripEntity> trips) {
-        this.trips = trips;
-    }
 
     public List<UserRoleEntity> getRoles() {
         return roles;
@@ -80,4 +76,11 @@ public class UserEntity extends BaseEntity{
         this.roles = roles;
     }
 
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
 }

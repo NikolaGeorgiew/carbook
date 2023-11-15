@@ -31,8 +31,8 @@ public class TripEntity extends BaseEntity{
     @FutureOrPresent
     private LocalTime pickUpTime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private UserEntity addedBy;
+//    @ManyToOne()
+//    private UserEntity addedBy;
 
     public String getPickUpLocation() {
         return pickUpLocation;
@@ -74,11 +74,4 @@ public class TripEntity extends BaseEntity{
         this.pickUpTime = pickUpTime;
     }
 
-    public UserEntity getAddedBy() {
-        return addedBy;
-    }
-
-    public void setAddedBy(UserEntity addedBy) {
-        this.addedBy = addedBy;
-    }
 }

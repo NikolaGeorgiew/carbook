@@ -33,12 +33,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ModelAndView login(@ModelAttribute("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel) {
+    public String login() {
         //TODO: implement better logic
-        if (loggedUser.isLogged()) {
-            return new ModelAndView("redirect:/home");
-        }
-        return new ModelAndView("login");
+//        if (loggedUser.isLogged()) {
+//            return new ModelAndView("redirect:/home");
+//        }
+        return "login";
     }
     @PostMapping("/login-error")
     public String onFailure(
@@ -105,6 +105,7 @@ public class UserController {
             modelAndView.addObject("hasRegistrationError", true);
             return modelAndView;
         }
+
 
         return new ModelAndView("redirect:/login");
     }

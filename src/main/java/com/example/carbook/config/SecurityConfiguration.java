@@ -3,29 +3,46 @@ package com.example.carbook.config;
 import com.example.carbook.model.enums.UserRoleEnum;
 import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.impl.CarBookUserDetailsService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
+
+    private final String remembermeKey;
+
+
+    public SecurityConfiguration(@Value("${carbook.remember.me.key}") String remembermeKey) {
+        this.remembermeKey = remembermeKey;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_THREADLOCAL);
 
         return httpSecurity.authorizeHttpRequests(
                 //Define which urls are visible by which users
                 authorizeRequests -> authorizeRequests
                         //All static resources which are situated in js,images, scss, css, fonts are available for anyone
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/fonts","/scss").permitAll()
                         //Allow anyone to see the home page, the registration page,login page, about page, contact page
                         .requestMatchers("/", "/login", "/register", "/about", "/contact", "login-error","/blog").permitAll()
-                        .requestMatchers("/services", "/admin-panel").hasRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers(HttpMethod.GET).permitAll()
+                        .requestMatchers("/services").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated
                         .anyRequest().authenticated()
 
@@ -52,7 +69,15 @@ public class SecurityConfiguration {
                       //invalidate the HTTP sesssion
                       .invalidateHttpSession(true);
           }
-        ).build();
+        ).rememberMe(
+                rememberMe -> {
+                    rememberMe
+                            .key(remembermeKey)
+                            .rememberMeParameter("rememberme")
+                            .rememberMeCookieName("rememberme");
+                }
+        ).
+                build();
 
     }
     @Bean
@@ -64,7 +89,7 @@ public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
+        return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+    }
 }
