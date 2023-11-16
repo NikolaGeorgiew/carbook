@@ -34,6 +34,6 @@ public class ExecutionTimeInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        // Leave this method empty if you don't have any specific actions to perform after completion
+
     }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 public class CommentEntity extends BaseEntity{
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(nullable = false)
     private String message;
 
     @Column

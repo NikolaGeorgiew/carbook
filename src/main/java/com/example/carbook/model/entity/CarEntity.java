@@ -30,7 +30,7 @@ public class CarEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private FuelEnum fuel;
 
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String description;
 
     //TODO : implement features

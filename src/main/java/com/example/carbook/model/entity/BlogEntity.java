@@ -14,7 +14,7 @@ public class BlogEntity extends BaseEntity{
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String description;
 
     @OneToMany(mappedBy = "blog")

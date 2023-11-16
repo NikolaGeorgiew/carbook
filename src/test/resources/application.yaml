@@ -1,0 +1,33 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+carbook:
+  #  default.admin.pass: ${DEFAULT_ADMIN_PASS:12345}
+  remember.me.key: ${REMEMBER_ME_KEY:12345}
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.springframework.security: TRACE
+
+mail:
+  carbook: "carbook@example.com"
+  host: localhost
+  port: 3333
+  username: test
+  password: test@example.com
+
+
+
+
