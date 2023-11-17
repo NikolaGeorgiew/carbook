@@ -12,11 +12,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -178,5 +178,32 @@ public class UserServiceTest {
         // Assert
         assertFalse(result); // The user exists but is not an admin, so should return false
     }
+    @Test
+    public void testGetAllUsers() {
+        // Arrange - Mock some user data
+        UserEntity user1 = new UserEntity();
+        user1.setId(1L);
+        user1.setUsername("user1");
+
+        UserEntity user2 = new UserEntity();
+        user2.setId(2L);
+        user2.setUsername("user2");
+
+        List<UserEntity> users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+
+        // Mock the behavior of userRepository.findAll()
+        when(userRepository.findAll()).thenReturn(users);
+
+        // Act
+        List<UserEntity> result = userService.getAllUsers();
+
+        // Assert
+        assertEquals(2, result.size()); // Assuming there are two users in the list
+        assertTrue(result.contains(user1));
+        assertTrue(result.contains(user2));
+    }
+
 
 }

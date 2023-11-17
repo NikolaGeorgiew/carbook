@@ -5,11 +5,9 @@ import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.impl.CarBookUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,19 +28,20 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_THREADLOCAL);
 
-        return httpSecurity.authorizeHttpRequests(
+        return httpSecurity
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(
                 //Define which urls are visible by which users
                 authorizeRequests -> authorizeRequests
                         //All static resources which are situated in js,images, scss, css, fonts are available for anyone
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/fonts","/scss").permitAll()
                         //Allow anyone to see the home page, the registration page,login page, about page, contact page
-                        .requestMatchers("/", "/login", "/register", "/about", "/contact", "login-error","/blog").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/about", "/contact", "/login-error","/blog", "/make-admin").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers("/services").hasRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/services", "/admin-panel").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated
                         .anyRequest().authenticated()
 

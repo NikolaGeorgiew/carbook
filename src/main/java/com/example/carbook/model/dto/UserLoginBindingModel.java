@@ -1,6 +1,5 @@
 package com.example.carbook.model.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Size;
 
 //TODO: DELETING

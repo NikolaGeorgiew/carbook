@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row d-flex mb-5 contact-info">
             <div class="col-md-8 block-9 mb-md-5">
-
+                <div  style="color: green" id="message-container"></div>
                 <div style="color: red;" th:text="${removeAdminError}"></div>
                 <div style="color: red;" th:text="${makeAdminError}"></div>
 
@@ -38,23 +38,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user : ${users}">
+                    <tr data-username="user1" th:each="user : ${users}">
                         <td th:text="${user.username}"></td>
                         <td>
-<!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().name()}"></span>-->
-<!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().getDisplayValue()}"></span>-->
+                            <!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().name()}"></span>-->
+                            <!--                            <span th:each="role : ${user.roles}" th:text="${role.getRole().getDisplayValue()}"></span>-->
 
                             <span th:each="role, iterStat : ${user.roles}">
                                 <span th:text="${role.getRole().getDisplayValue()}"></span>
                                 <span th:if="${!iterStat.last}">, </span>
                             </span>
-<!--                            <span th:if="${user.roles.contains()}" th:text="ÄDMIN"></span>-->
-<!--                            <span th:if="${user.roles.contains('USER')}" th:text="USER"></span>-->
+                            <!--                            <span th:if="${user.roles.contains()}" th:text="ÄDMIN"></span>-->
+                            <!--                            <span th:if="${user.roles.contains('USER')}" th:text="USER"></span>-->
                         </td>
+<!--                        <td>-->
+<!--                            <span th:each="role, iterStat : ${user.roles}" class="user-role" th:text="${role.getRole().getDisplayValue()}"></span>-->
+<!--                            <span th:if="${!iterStat.last}">, </span>-->
+<!--                        </td>-->
                         <td>
                             <form th:action="@{/make-admin}" method="post">
                                 <input type="hidden" name="username" th:value="${user.username}" />
-                                <button type="submit" class="btn btn-primary">Make Admin</button>
+                                <button id="makeAdminButton" type="submit" class="btn btn-primary makeAdminButton">Make Admin</button>
                             </form>
                         </td>
                         <td>
@@ -158,6 +162,67 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="js/google-map.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Attach click event listener to the "Make Admin" buttons
+        var makeAdminButtons = document.querySelectorAll('.makeAdminButton');
+        var messageContainer = document.getElementById('message-container');
+
+        makeAdminButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Get the username from the hidden input field
+                var usernameInput = event.target.form.querySelector('input[name="username"]');
+                var username = usernameInput.value;
+
+                console.log('Username Input Value:', usernameInput.value);
+                console.log('Extracted Username:', username);
+
+                // Make a fetch request to your server
+                console.log('Before fetch request');
+                fetch('http://localhost:8080/make-admin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username }),
+                })
+                    .then(response => {
+                        console.log('After fetch request');
+                        if (!response.ok) {
+                            throw new Error('Failed to make user admin');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Update the front-end based on the response from the server
+                        if (data.success) {
+                            // Show a success message in the specified container
+                            var successMessage = document.createElement('div');
+                            successMessage.textContent = 'User has become an admin';
+                            successMessage.style.color = 'green';
+                            messageContainer.appendChild(successMessage);
+                        } else {
+                            // Show an error message in the specified container
+                            var errorMessage = document.createElement('div');
+                            errorMessage.textContent = 'Failed to make user admin';
+                            errorMessage.style.color = 'red';
+                            messageContainer.appendChild(errorMessage);
+                        }
+                    })
+                    .catch(error => {
+                        // Show an error message in the specified container
+                        var errorMessage = document.createElement('div');
+                        errorMessage.textContent = 'Error: ' + error.message;
+                        errorMessage.style.color = 'red';
+                        messageContainer.appendChild(errorMessage);
+                    });
+            });
+        });
+    });
+</script>
 
 
 </body>
