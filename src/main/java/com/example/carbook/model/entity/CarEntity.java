@@ -1,9 +1,11 @@
 package com.example.carbook.model.entity;
 
+import com.example.carbook.model.enums.CarTypeEnum;
 import com.example.carbook.model.enums.FuelEnum;
 import com.example.carbook.model.enums.TransmissionEnum;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 
 
 @Entity
@@ -12,6 +14,13 @@ public class CarEntity extends BaseEntity{
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CarTypeEnum type;
 
     @Column
     private Integer mileage;
@@ -32,6 +41,9 @@ public class CarEntity extends BaseEntity{
 
     @Column
     private String description;
+
+    @Column
+    private BigDecimal priceForDay;
 
     //TODO : implement features
     //private List<String> features;
@@ -90,5 +102,29 @@ public class CarEntity extends BaseEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public CarTypeEnum getType() {
+        return type;
+    }
+
+    public void setType(CarTypeEnum type) {
+        this.type = type;
+    }
+
+    public BigDecimal getPriceForDay() {
+        return priceForDay;
+    }
+
+    public void setPriceForDay(BigDecimal priceForDay) {
+        this.priceForDay = priceForDay;
     }
 }
