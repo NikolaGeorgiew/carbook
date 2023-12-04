@@ -1,13 +1,16 @@
 package com.example.carbook.service.impl;
 
+import com.example.carbook.model.dto.CarDetailDTO;
 import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.model.entity.CarEntity;
 import com.example.carbook.repo.CarRepository;
 import com.example.carbook.service.CarService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
 
 @Service
@@ -23,6 +26,27 @@ public class CarServiceImpl implements CarService {
         return carRepository
                 .findAll(pageable)
                 .map(CarServiceImpl::mapAsSummary);
+    }
+
+    @Override
+    public Optional<CarDetailDTO> getCarDetail(Long id) {
+        return carRepository
+                .findById(id)
+                .map(this::mapAsDetails);
+    }
+
+    private CarDetailDTO mapAsDetails(CarEntity carEntity) {
+        return new CarDetailDTO(
+                carEntity.getId(),
+                carEntity.getImageUrl(),
+                carEntity.getMileage(),
+                carEntity.getTransmission(),
+                carEntity.getSeats(),
+                carEntity.getLuggage(),
+                carEntity.getFuel(),
+                carEntity.getDescription(),
+                carEntity.getBrand(),
+                carEntity.getType());
     }
 
     private static CarSummaryDTO mapAsSummary(CarEntity carEntity) {
