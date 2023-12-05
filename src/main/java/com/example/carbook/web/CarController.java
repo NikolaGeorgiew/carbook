@@ -23,7 +23,6 @@ public class CarController {
 
     @GetMapping("/car")
     public String cars(Model model, @PageableDefault(
-            size = 3,
             sort = "id"
     )Pageable pageable) {
         Page<CarSummaryDTO> allCars = carService.getAllCars(pageable);
