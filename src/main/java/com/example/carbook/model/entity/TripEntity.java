@@ -31,8 +31,11 @@ public class TripEntity extends BaseEntity{
     @FutureOrPresent
     private LocalTime pickUpTime;
 
-//    @ManyToOne()
-//    private UserEntity addedBy;
+    @ManyToOne()
+    private UserEntity addedBy;
+
+    @OneToOne
+    private CarEntity car;
 
     public String getPickUpLocation() {
         return pickUpLocation;
@@ -74,4 +77,19 @@ public class TripEntity extends BaseEntity{
         this.pickUpTime = pickUpTime;
     }
 
+    public UserEntity getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(UserEntity addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    public CarEntity getCar() {
+        return car;
+    }
+
+    public void setCar(CarEntity car) {
+        this.car = car;
+    }
 }

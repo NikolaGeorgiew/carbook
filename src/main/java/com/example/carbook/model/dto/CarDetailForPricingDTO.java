@@ -4,16 +4,12 @@ import com.example.carbook.model.enums.CarTypeEnum;
 
 import java.math.BigDecimal;
 
-public record CarSummaryDTO(
+public record CarDetailForPricingDTO(
         Long id,
         String brand,
         CarTypeEnum type,
         BigDecimal priceForDay,
-        String imageUrl,
-        BigDecimal priceForHour,
-        BigDecimal priceForMonth,
-        BigDecimal priceForFuelSurcharges
-
+        String imageUrl
 ) {
     public String summary() {
         return brand + " " + type;

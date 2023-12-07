@@ -45,6 +45,14 @@ public class CarEntity extends BaseEntity{
     @Column
     private BigDecimal priceForDay;
 
+    @Column
+    private BigDecimal priceForHour;
+
+    @Column
+    private BigDecimal priceForMonth;
+
+    private BigDecimal priceForFuelSurcharges;
+
     //TODO : implement features
     //private List<String> features;
 
@@ -126,5 +134,29 @@ public class CarEntity extends BaseEntity{
 
     public void setPriceForDay(BigDecimal priceForDay) {
         this.priceForDay = priceForDay;
+    }
+
+    public BigDecimal getPriceForHour() {
+        return priceForHour;
+    }
+
+    public void setPriceForHour(BigDecimal priceForHour) {
+        this.priceForHour = priceForHour;
+    }
+
+    public BigDecimal getPriceForMonth() {
+        return priceForMonth;
+    }
+
+    public void setPriceForMonth(BigDecimal priceForMonth) {
+        this.priceForMonth = priceForMonth;
+    }
+
+    public BigDecimal getPriceForFuelSurcharges() {
+        return priceForFuelSurcharges;
+    }
+
+    public void setPriceForFuelSurcharges(BigDecimal priceForFuelSurcharges) {
+        this.priceForFuelSurcharges = priceForFuelSurcharges;
     }
 }

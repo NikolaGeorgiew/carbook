@@ -1,6 +1,7 @@
 package com.example.carbook.service.impl;
 
 import com.example.carbook.model.dto.CarDetailDTO;
+import com.example.carbook.model.dto.CarDetailForPricingDTO;
 import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.model.entity.CarEntity;
 import com.example.carbook.repo.CarRepository;
@@ -35,6 +36,7 @@ public class CarServiceImpl implements CarService {
                 .map(this::mapAsDetails);
     }
 
+
     private CarDetailDTO mapAsDetails(CarEntity carEntity) {
         return new CarDetailDTO(
                 carEntity.getId(),
@@ -51,7 +53,8 @@ public class CarServiceImpl implements CarService {
 
     private static CarSummaryDTO mapAsSummary(CarEntity carEntity) {
         return new CarSummaryDTO(
-                carEntity.getId(), carEntity.getBrand(), carEntity.getType(), carEntity.getPriceForDay(), carEntity.getImageUrl()
+                carEntity.getId(), carEntity.getBrand(), carEntity.getType(), carEntity.getPriceForDay(), carEntity.getImageUrl(),
+                carEntity.getPriceForHour(), carEntity.getPriceForMonth(), carEntity.getPriceForFuelSurcharges()
         );
     }
 }

@@ -52,8 +52,7 @@ public class CarBookUserDetailsService implements UserDetailsService {
         return build;
     }
     private static GrantedAuthority mapAuthorities(UserRoleEntity userRoleEntity) {
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
-        return simpleGrantedAuthority;
+        return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
     }
 
     // Add a method to get users who haven't been logged in for more than a year
