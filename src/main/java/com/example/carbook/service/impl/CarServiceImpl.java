@@ -4,6 +4,7 @@ import com.example.carbook.model.dto.CarDetailDTO;
 import com.example.carbook.model.dto.CarDetailForPricingDTO;
 import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.model.entity.CarEntity;
+import com.example.carbook.model.enums.CarTypeEnum;
 import com.example.carbook.repo.CarRepository;
 import com.example.carbook.service.CarService;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,14 @@ public class CarServiceImpl implements CarService {
         return carRepository
                 .findById(id)
                 .map(this::mapAsDetails);
+    }
+
+
+    @Override
+    public Page<CarSummaryDTO> findAllByCarEnumAndIdNot(CarTypeEnum type, Long id, Pageable pageable) {
+        return carRepository
+                .findAllByCarEnumAndIdNot(type, id, pageable)
+                .map(CarServiceImpl::mapAsSummary);
     }
 
 

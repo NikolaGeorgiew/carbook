@@ -13,12 +13,20 @@ public class BlogEntity extends BaseEntity{
 
     @Column(nullable = false)
     private String title;
+    @Column(name = "description_first_title", nullable = false)
+    private String descriptionFirstTitle;
 
-    @Column(nullable = false)
-    private String description;
+    @Column(name = "second_title")
+    private String secondTitle;
+    @Column(name = "description_second_title", nullable = false)
+    private String descriptionSecondTitle;
 
-    @OneToMany(mappedBy = "blog")
-    private List<CommentEntity> comments;
+
+//    @OneToMany(mappedBy = "blog")
+//    private List<CommentEntity> comments;
+
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
 
     public String getTitle() {
         return title;
@@ -28,19 +36,36 @@ public class BlogEntity extends BaseEntity{
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public List<CommentEntity> getComments() {
-        return comments;
+    public String getDescriptionFirstTitle() {
+        return descriptionFirstTitle;
     }
 
-    public void setComments(List<CommentEntity> comments) {
-        this.comments = comments;
+    public void setDescriptionFirstTitle(String descriptionFirstTitle) {
+        this.descriptionFirstTitle = descriptionFirstTitle;
+    }
+
+    public String getSecondTitle() {
+        return secondTitle;
+    }
+
+    public void setSecondTitle(String secondTitle) {
+        this.secondTitle = secondTitle;
+    }
+
+    public String getDescriptionSecondTitle() {
+        return descriptionSecondTitle;
+    }
+
+    public void setDescriptionSecondTitle(String descriptionSecondTitle) {
+        this.descriptionSecondTitle = descriptionSecondTitle;
     }
 }

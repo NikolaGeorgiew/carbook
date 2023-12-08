@@ -30,7 +30,7 @@
     					<div class="img rounded d-flex align-items-end" th:style="'background-image: url(' + ${car.imageUrl} + ');'">
     					</div>
     					<div class="text">
-    						<h2 class="mb-0" th:text="*{summary()}" >Mercedes Grand Sedan</h2>
+    						<h2 class="mb-0"><a th:href="@{/car/{id}(id=*{id})}" th:text="*{summary()}">Mercedes Grand Sedan</a></h2>
     						<div class="d-flex mb-3">
 	    						<p th:text="*{priceForDay}" class="price ml-auto">$500</p><span>/day</span>
     						</div>

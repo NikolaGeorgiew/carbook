@@ -20,21 +20,13 @@ public class TripController {
         this.tripService = tripService;
     }
 
-//    @GetMapping("/add-trip")
-//    public String addTrip() {
-//        return "/add-trip";
-//    }
+//        @GetMapping("/add-trip/{id}")
+//        public String showAddTripForm(@PathVariable("id") Long id,AddTripDTO addTripDTO,  Model model) {
+//            // Populate the model with necessary data (if needed)
+//            model.addAttribute("addTripDTO", AddTripDTO.empty()); // Assuming you have a form backing object
 //
-//    @PostMapping("/add-trip/{id}")
-//    public String addTrip(@PathVariable("id") Long id, @Valid AddTripDTO addTripDTO, BindingResult bindingResult, RedirectAttributes rAtt) {
-//        if (bindingResult.hasErrors()){
-//            rAtt.addFlashAttribute("addTripDTO", addTripDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addTripDTO", bindingResult);
-//            return "redirect:/car/" + id;
-//        }
-//        tripService.createTrip(addTripDTO);
-//        return "redirect:/";
-//    }
+//            return "/add-trip";// Assuming "add-trip" is the Thymeleaf template for the add trip form
+//}
 @GetMapping("/add-trip")
 public String showAddTripForm(Model model) {
     // Populate the model with necessary data (if needed)
@@ -43,18 +35,6 @@ public String showAddTripForm(Model model) {
     return "add-trip"; // Assuming "add-trip" is the Thymeleaf template for the add trip form
 }
 
-//    @PostMapping("/add-trip/{id}")
-//    public String addTrip(@PathVariable("id") Long id, @Valid AddTripDTO addTripDTO, BindingResult bindingResult, RedirectAttributes rAtt) {
-//        if (bindingResult.hasErrors()) {
-//            rAtt.addFlashAttribute("addTripDTO", addTripDTO);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addTripDTO", bindingResult);
-//            return "redirect:/add-trip/{id}"; // Redirect back to the form with errors
-//        }
-//
-//        tripService.createTrip(addTripDTO);
-//
-//        return "redirect:/"; // Redirect to the home page or wherever you want to go after a successful trip creation
-//    }
 @PostMapping("/add-trip/")
 public String addTrip(@Valid AddTripDTO addTripDTO, BindingResult bindingResult, RedirectAttributes rAtt) {
     if (bindingResult.hasErrors()) {

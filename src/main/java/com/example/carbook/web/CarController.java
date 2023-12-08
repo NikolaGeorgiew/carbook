@@ -32,11 +32,16 @@ public class CarController {
     }
 
     @GetMapping("/car/{id}")
-    public String details(@PathVariable("id") Long id, Model model) {
+    public String details(@PathVariable("id") Long id, Model model, @PageableDefault(size = 3) Pageable pageable) {
         CarDetailDTO carDetailDTO = carService
                 .getCarDetail(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Object with id " + id + " was not found!"));
+
+        Page<CarSummaryDTO> allCarsExcludingOne = carService.findAllByCarEnumAndIdNot(carDetailDTO.type(), id, pageable);
+
         model.addAttribute("car", carDetailDTO);
+        model.addAttribute("allCars", allCarsExcludingOne);
+
         return "car-single";
     }
 }

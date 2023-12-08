@@ -1,6 +1,7 @@
 package com.example.carbook.service.impl;
 
 import com.example.carbook.model.dto.AddTripDTO;
+import com.example.carbook.model.entity.CarEntity;
 import com.example.carbook.model.entity.TripEntity;
 import com.example.carbook.repo.TripRepository;
 import com.example.carbook.service.TripService;
@@ -22,6 +23,7 @@ public class TripServiceImpl implements TripService {
     public void createTrip(AddTripDTO addTripDTO) {
 
         TripEntity tripEntity = map(addTripDTO);
+
 
         tripRepository.save(tripEntity);
     }
