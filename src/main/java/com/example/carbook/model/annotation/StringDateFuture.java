@@ -1,7 +1,6 @@
 package com.example.carbook.model.annotation;
 
-import com.example.carbook.validation.StringDateFutureOrPresentValidator;
-import com.example.carbook.validation.StringTimeFutureOrPresentValidator;
+import com.example.carbook.validation.StringDateFutureValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -13,9 +12,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = StringTimeFutureOrPresentValidator.class)
-public @interface StringTimeFutureOrPresent {
-    String message() default "Time is not in future or present!";
+@Constraint(validatedBy = StringDateFutureValidator.class)
+public @interface StringDateFuture {
+    String message() default "Date is not in future or present!";
 
     Class<?>[] groups() default { };
 

@@ -1,33 +1,44 @@
 package com.example.carbook.model.dto;
 
-import com.example.carbook.model.annotation.StringDateFutureOrPresent;
-import com.example.carbook.model.annotation.StringTimeFutureOrPresent;
-import jakarta.validation.constraints.FutureOrPresent;
+import com.example.carbook.model.annotation.StringDateFuture;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import java.util.Date;
-
 public class AddTripDTO{
     private Long id;
-    @NotEmpty(message = "Pick up location must be provided!") @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
+    @NotEmpty(message = "Pick up location must be provided!")
+    @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
     private String pickUpLocation;
-    @NotEmpty(message = "Drop off location must be provided!") @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
+    @NotEmpty(message = "Drop off location must be provided!")
+    @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
     private String dropOffLocation;
-    @NotEmpty(message = "Pick up date must be provided!") @StringDateFutureOrPresent(message = "Date must be in future !")
+    @NotEmpty(message = "Pick up date must be provided!")
+    @StringDateFuture(message = "Date must be in future !")
     private String pickUpDate;
-    @NotEmpty(message = "Drop off date must be provided!") @StringDateFutureOrPresent(message = "Date must be in future !")
+    @NotEmpty(message = "Drop off date must be provided!")
+    @StringDateFuture(message = "Date must be in future !")
     private String dropOffDate;
     @NotEmpty(message = "Pick up time must be provided!")
     private String pickUpTime;
 
-    public AddTripDTO(Long id, String pickUpLocation, String dropOffLocation, String pickUpDate, String dropOffDate, String pickUpTime) {
+    private Long carId;
+
+    public AddTripDTO(Long id, String pickUpLocation, String dropOffLocation, String pickUpDate, String dropOffDate, String pickUpTime, Long carId) {
         this.id = id;
         this.pickUpLocation = pickUpLocation;
         this.dropOffLocation = dropOffLocation;
         this.pickUpDate = pickUpDate;
         this.dropOffDate = dropOffDate;
         this.pickUpTime = pickUpTime;
+        this.carId = carId;
+    }
+
+    public Long getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
     }
 
     public Long getId() {
@@ -78,6 +89,6 @@ public class AddTripDTO{
         this.pickUpTime = pickUpTime;
     }
     public static AddTripDTO empty() {
-        return new AddTripDTO(null, null, null,null,null,null);
+        return new AddTripDTO(null, null, null,null,null,null, null);
     }
 }

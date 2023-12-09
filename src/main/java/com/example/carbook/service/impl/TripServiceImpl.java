@@ -24,8 +24,10 @@ public class TripServiceImpl implements TripService {
     public void createTrip(AddTripDTO addTripDTO) {
 
         TripEntity tripEntity = map(addTripDTO);
+        CarEntity carEntity = new CarEntity();
+        carEntity.setId(addTripDTO.getCarId());
 
-
+        tripEntity.setCar(carEntity);
         tripRepository.save(tripEntity);
     }
 

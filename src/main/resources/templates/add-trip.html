@@ -37,13 +37,13 @@
             <div class="col-md-12	featured-top">
                 <div class="row no-gutters">
                     <div class="col-md-4 d-flex align-items-center">
-                        <form th:action="@{/add-trip/{id}(id=*{id})}"
+                        <form th:action="@{/add-trip/{carId}(carId=*{carId})}"
                               th:method="post"
                               th:object="${addTripDTO}"
                               class="request-form ftco-animate bg-primary">
                             <h2>Make your trip</h2>
                             <div class="form-group">
-                                <label for="" class="label">Pick-up location</label>
+                                <label class="label">Pick-up location</label>
                                 <input th:field="*{pickUpLocation}"
                                        th:errorclass="is-invalid"
                                         type="text" class="form-control" placeholder="City, Airport, Station, etc">

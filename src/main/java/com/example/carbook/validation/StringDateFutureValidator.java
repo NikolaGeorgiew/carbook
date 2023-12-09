@@ -1,6 +1,6 @@
 package com.example.carbook.validation;
 
-import com.example.carbook.model.annotation.StringDateFutureOrPresent;
+import com.example.carbook.model.annotation.StringDateFuture;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -8,9 +8,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class StringDateFutureOrPresentValidator implements ConstraintValidator<StringDateFutureOrPresent, String> {
+public class StringDateFutureValidator implements ConstraintValidator<StringDateFuture, String> {
     @Override
-    public void initialize(StringDateFutureOrPresent constraintAnnotation) {
+    public void initialize(StringDateFuture constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -20,6 +20,7 @@ public class StringDateFutureOrPresentValidator implements ConstraintValidator<S
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MM/d/yyyy");
             DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("M/d/yyyy");
+            DateTimeFormatter formatter4 = DateTimeFormatter.ofPattern("M/dd/yyyy");
             try {
                 LocalDate parse = LocalDate.parse(value, formatter);
                 return parse.isAfter(LocalDate.now());
@@ -32,7 +33,12 @@ public class StringDateFutureOrPresentValidator implements ConstraintValidator<S
                         LocalDate parse = LocalDate.parse(value,formatter3);
                         return parse.isAfter(LocalDate.now());
                     } catch (DateTimeException e2) {
-                        return false;
+                        try {
+                            LocalDate parse = LocalDate.parse(value,formatter4);
+                            return parse.isAfter(LocalDate.now());
+                        }catch (DateTimeException e3) {
+                            return false;
+                        }
                     }
                 }
             }
