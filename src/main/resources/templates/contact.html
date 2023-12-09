@@ -64,21 +64,29 @@
                 <input th:field="*{nameOfUser}"
                        th:errorclass="is-invalid"
                         type="text" class="form-control" placeholder="Your Name">
+                  <small th:if="${#fields.hasErrors('nameOfUser')}"
+                         th:errors="*{nameOfUser}" class="text-danger"></small>
               </div>
               <div class="form-group">
                 <input th:field="*{emailOfUser}"
                         th:errorclass="is-invalid"
                         type="text" class="form-control" placeholder="Your Email">
+                  <small th:if="${#fields.hasErrors('emailOfUser')}"
+                         th:errors="*{emailOfUser}" class="text-danger"></small>
               </div>
               <div class="form-group">
                 <input th:field="*{subject}"
                         th:errorclass="is-invalid"
                        type="text" class="form-control" placeholder="Subject">
+                  <small th:if="${#fields.hasErrors('subject')}"
+                         th:errors="*{subject}" class="text-danger"></small>
               </div>
               <div class="form-group">
                 <textarea  th:field="*{message}"
                            th:errorclass="is-invalid"
                         name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                  <small th:if="${#fields.hasErrors('message')}"
+                         th:errors="*{message}" class="text-danger"></small>
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">

@@ -27,9 +27,6 @@ public class UserEntity extends BaseEntity{
 
     private LocalDateTime lastLogin;
 
-    @OneToMany(mappedBy = "addedBy")
-    private Set<TripEntity> trips;
-
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",

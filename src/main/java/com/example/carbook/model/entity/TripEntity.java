@@ -1,6 +1,7 @@
 package com.example.carbook.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Size;
 
@@ -20,19 +21,15 @@ public class TripEntity extends BaseEntity{
     private String dropOffLocation;
 
     @Column(name = "pick_up_date", nullable = false)
-    @FutureOrPresent
+    @Future
     private LocalDate pickUpDate;
 
     @Column(name = "drop_off_date", nullable = false)
-    @FutureOrPresent
+    @Future
     private LocalDate dropOffDate;
 
     @Column(name = "pick_up_time", nullable = false)
-    @FutureOrPresent
     private LocalTime pickUpTime;
-
-    @ManyToOne()
-    private UserEntity addedBy;
 
     @OneToOne
     private CarEntity car;
@@ -77,13 +74,6 @@ public class TripEntity extends BaseEntity{
         this.pickUpTime = pickUpTime;
     }
 
-    public UserEntity getAddedBy() {
-        return addedBy;
-    }
-
-    public void setAddedBy(UserEntity addedBy) {
-        this.addedBy = addedBy;
-    }
 
     public CarEntity getCar() {
         return car;

@@ -6,17 +6,19 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.Date;
+
 public class AddTripDTO{
     private Long id;
-    @NotEmpty @Size(min = 2, max = 100)
+    @NotEmpty(message = "Pick up location must be provided!") @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
     private String pickUpLocation;
-    @NotEmpty @Size(min = 2, max = 100)
+    @NotEmpty(message = "Drop off location must be provided!") @Size(min = 2, max = 100, message = "Size must be between 2 and 100 characters !")
     private String dropOffLocation;
-    @NotEmpty @StringDateFutureOrPresent
+    @NotEmpty(message = "Pick up date must be provided!") @StringDateFutureOrPresent(message = "Date must be in future !")
     private String pickUpDate;
-    @NotEmpty @StringDateFutureOrPresent
+    @NotEmpty(message = "Drop off date must be provided!") @StringDateFutureOrPresent(message = "Date must be in future !")
     private String dropOffDate;
-    @NotEmpty @StringTimeFutureOrPresent
+    @NotEmpty(message = "Pick up time must be provided!")
     private String pickUpTime;
 
     public AddTripDTO(Long id, String pickUpLocation, String dropOffLocation, String pickUpDate, String dropOffDate, String pickUpTime) {

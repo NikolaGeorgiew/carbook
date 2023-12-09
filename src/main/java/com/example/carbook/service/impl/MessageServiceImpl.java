@@ -23,16 +23,4 @@ public class MessageServiceImpl implements MessageService {
 
         messageRepository.save(messageEntity);
     }
-
-
-//    private MessageEntity map(MessageDTO messageDTO) {
-//        MessageEntity messageEntity = new MessageEntity();
-//        messageEntity.setMessage(messageDTO.message());
-//        messageEntity.setEmailOfUser(messageDTO.emailOfUser());
-//        messageEntity.setSubject(messageDTO.subject());
-//        messageEntity.setNameOfUser(messageDTO.nameOfUser());
-//        messageEntity.setId(messageDTO.id());
-//
-//        return messageEntity;
-//    }
 }

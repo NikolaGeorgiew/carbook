@@ -42,4 +42,5 @@ public class BlogController {
         model.addAttribute("blogs", allBlogsExcludingOne);
         return "blog-single";
     }
+
 }
