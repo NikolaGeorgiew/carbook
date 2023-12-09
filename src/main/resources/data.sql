@@ -21,8 +21,8 @@ values
     (5, 'MckLaren', 'asdasd', 'Gasoline','/images/car-3.jpg', 4, 50000, 400, 5, 'Manual', 'Coupe', 3, 10, 1000),
     (6, 'Ford Mustang', 'asd', 'Gasoline','/images/car-4.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000),
     (7, 'Alfa Romeo', 'asd', 'DIESEL','/images/car-6.jpg', 4, 50000, 400, 5, 'Manual', 'Coupe', 3, 10, 1000),
-    (8, 'Mercedes Benz E Class', 'asd', 'DIESEL','/images/car-7.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000),
-    (10, 'Mercedes Benz AMG GT', 'asd', 'Gasoline','/images/car-9.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000),
+    (8, 'Mercedes E Class', 'asd', 'DIESEL','/images/car-7.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000),
+    (10, 'Mercedes AMG GT', 'asd', 'Gasoline','/images/car-9.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000),
     (11, 'Jeep', 'asd', 'Gasoline','/images/car-8.jpg', 4, 50000, 400, 5, 'Automatic', 'SUV', 3, 10, 1000),
     (12, 'Mercedes Benz B Class', 'asd', 'DIESEL','/images/car-11.jpg', 4, 50000, 400, 5, 'Manual', 'Sedan', 3, 10, 1000),
     (13, 'Mercedes Benz Amg GT Black Series', 'asd', 'Gasoline','/images/car-10.jpg', 4, 50000, 400, 5, 'Automatic', 'Coupe', 3, 10, 1000);

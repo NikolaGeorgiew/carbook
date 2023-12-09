@@ -1,11 +1,13 @@
 package com.example.carbook.model.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 public class MessageDTO {
     @NotEmpty(message = "Name must be provided!")
     private String nameOfUser;
     @NotEmpty(message = "Email must be provided!")
+    @Email(message = "Incorrect email !")
     private String emailOfUser;
     @NotEmpty(message = "Subject must be provided!")
     private String subject;
