@@ -3,7 +3,6 @@ package com.example.carbook.validation;
 import com.example.carbook.model.annotation.StringDateFuture;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,8 +42,6 @@ public class StringDateFutureValidator implements ConstraintValidator<StringDate
                 }
             }
 
-//            LocalDate parse = LocalDate.parse(value,formatter);
-//            return parse.isAfter(LocalDate.now());
         }
         return false;
     }

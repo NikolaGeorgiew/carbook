@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 public class CarBookUserDetailsService implements UserDetailsService {
@@ -33,36 +32,18 @@ public class CarBookUserDetailsService implements UserDetailsService {
         userEntity.setLastLogin(LocalDateTime.now());
         userRepository.save(userEntity);
 
-        UserDetails userDetails = mapDetails(userEntity);
-
-//        UserDetails userDetails = userRepository
-//                .findByUsername(username)
-//                .map(CarBookUserDetailsService::mapDetails)
-//                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found!"));
-
-        return userDetails;
+        return mapDetails(userEntity);
 
     }
     private static UserDetails mapDetails(UserEntity userEntity) {
-        UserDetails build = User
+        return User
                 .withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
                 .authorities(userEntity.getRoles().stream().map(CarBookUserDetailsService::mapAuthorities).toList())
                 .build();
-        return build;
     }
     private static GrantedAuthority mapAuthorities(UserRoleEntity userRoleEntity) {
         return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
     }
-
-    // Add a method to get users who haven't been logged in for more than a year
-//    public List<UserEntity> findInactiveUsers() {
-//        LocalDateTime oneMinAgo = LocalDateTime.now().minusMinutes(1);
-//        return userRepository.findByLastLoginBefore(oneMinAgo);
-//    }
-//    // Add a method to delete inactive users
-//    public void deleteInactiveUsers(List<UserEntity> inactiveUsers) {
-//        userRepository.deleteAll(inactiveUsers);
-//    }
 
 }

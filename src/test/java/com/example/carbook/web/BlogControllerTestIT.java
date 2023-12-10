@@ -2,7 +2,6 @@ package com.example.carbook.web;
 
 import com.example.carbook.model.dto.BlogSummaryDTO;
 import com.example.carbook.service.BlogService;
-import com.example.carbook.service.CarService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

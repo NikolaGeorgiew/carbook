@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
 
     private final String remembermeKey;
@@ -41,7 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/", "/login", "/register", "/about", "/contact", "/login-error","/blog", "/make-admin", "add-trip/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers("/services", "/admin-panel").hasRole(UserRoleEnum.ADMIN.name())
+                        .requestMatchers("/admin-panel").hasRole(UserRoleEnum.ADMIN.name())
                         // all other requests are authenticated
                         .anyRequest().authenticated()
 

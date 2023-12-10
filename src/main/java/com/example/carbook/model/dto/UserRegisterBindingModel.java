@@ -9,7 +9,7 @@ public class UserRegisterBindingModel {
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters!")
     private String username;
 
-    @Email
+    @Email(message = "Incorrect email !")
     @NotBlank(message = "Email cannot be empty!")
     private String email;
 

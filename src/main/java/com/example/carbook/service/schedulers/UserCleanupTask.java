@@ -29,7 +29,7 @@ public class UserCleanupTask {
             userRepository.delete(user);
         }
 
-        // You can log the number of deleted users or perform additional actions as needed
+        //log the number of deleted users
         System.out.println(inactiveUsers.size() + " inactive users deleted.");
     }
 }

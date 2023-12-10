@@ -27,8 +27,5 @@ public class AboutControllerTestIT {
         // Verify that the view name is "/about"
         result.andExpect(view().name("/about"));
 
-        // Optionally, you can further assert the content of the response if needed
-        // For example, if your view renders dynamic content, you might check for specific text
-        // result.andExpect(content().string(containsString("Some expected content")));
     }
 }

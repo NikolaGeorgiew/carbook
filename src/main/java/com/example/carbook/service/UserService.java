@@ -1,6 +1,5 @@
 package com.example.carbook.service;
 
-import com.example.carbook.model.dto.UserLoginBindingModel;
 import com.example.carbook.model.dto.UserRegisterBindingModel;
 import com.example.carbook.model.entity.UserEntity;
 
@@ -16,7 +15,4 @@ public interface UserService {
 
     boolean isAdmin(String username);
 
-//    boolean login(UserLoginBindingModel userLoginBindingModel);
-//
-//    void logout();
 }

@@ -1,6 +1,5 @@
 package com.example.carbook.web;
 
-import com.example.carbook.model.dto.CarDetailForPricingDTO;
 import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.service.CarService;
 import org.springframework.data.domain.Page;

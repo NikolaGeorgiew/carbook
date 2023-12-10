@@ -2,10 +2,7 @@ package com.example.carbook.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import java.util.List;
 
 @Entity
 @Table(name = "blogs")
@@ -13,17 +10,13 @@ public class BlogEntity extends BaseEntity{
 
     @Column(nullable = false)
     private String title;
-    @Column(name = "description_first_title", nullable = false)
+    @Column(name = "description_first_title", nullable = false,length = 2000)
     private String descriptionFirstTitle;
 
     @Column(name = "second_title")
     private String secondTitle;
-    @Column(name = "description_second_title", nullable = false)
+    @Column(name = "description_second_title", nullable = false,length = 2000)
     private String descriptionSecondTitle;
-
-
-//    @OneToMany(mappedBy = "blog")
-//    private List<CommentEntity> comments;
 
     @Column(name = "image_url", nullable = false)
     private String imageUrl;

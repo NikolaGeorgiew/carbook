@@ -30,8 +30,4 @@ public class UserControllerRegistrationTestIT {
         ).andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/login"));
     }
-//    userEntity.setUsername("user");
-//        userEntity.setEmail("user@email");
-//        userEntity.setPassword("test");
-//        userEntity.setRoles(List.of(adminRole,userRole));
 }

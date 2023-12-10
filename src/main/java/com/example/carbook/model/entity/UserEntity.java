@@ -1,6 +1,5 @@
 package com.example.carbook.model.entity;
 
-import com.example.carbook.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -8,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,11 +32,6 @@ public class UserEntity extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<UserRoleEntity> roles = new ArrayList<>();
-
-//    @Enumerated(EnumType.STRING)
-//    @Column
-//    private UserRoleEnum role;
-
 
     public String getUsername() {
         return username;

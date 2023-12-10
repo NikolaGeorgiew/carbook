@@ -4,7 +4,6 @@ import com.example.carbook.model.entity.CarEntity;
 import com.example.carbook.model.enums.CarTypeEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Range;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

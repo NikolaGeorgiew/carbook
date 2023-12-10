@@ -8,7 +8,6 @@ import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.RoleService;
 import com.example.carbook.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +22,10 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final ModelMapper modelMapper;
 
-    //private final LoggedUser loggedUser;
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        //this.loggedUser = loggedUser;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
     }
@@ -44,13 +41,6 @@ public class UserServiceImpl implements UserService {
         if (existsByUsernameOrEmail) {
             return false;
         }
-
-
-//        UserEntity user = new UserEntity();
-//
-//        user.setEmail(userRegisterBindingModel.getEmail());
-//        user.setUsername(userRegisterBindingModel.getUsername());
-//        user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
         UserEntity user = modelMapper.map(userRegisterBindingModel,UserEntity.class);
 
         user.setPassword(passwordEncoder.encode(userRegisterBindingModel.getPassword()));
@@ -61,12 +51,6 @@ public class UserServiceImpl implements UserService {
         user.setRoles(List.of(userRoleEntity));
 
         userRepository.save(user);
-
-//        applicationEventPublisher.publishEvent(new UserRegisteredEvent(
-//                "UserService",
-//                userRegisterBindingModel.getEmail(),
-//                userRegisterBindingModel.getUsername()
-//        ));
 
         return true;
     }
@@ -113,20 +97,4 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-//    @Override
-//    public boolean login(UserLoginBindingModel userLoginBindingModel) {
-//        String username = userLoginBindingModel.getUsername();
-//        UserEntity user = userRepository.findByUsername(username);
-//
-//        if (user != null && passwordEncoder.matches(userLoginBindingModel.getPassword(), user.getPassword())) {
-//            loggedUser.login(username);
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public void logout() {
-//        this.loggedUser.logout();
-//    }
 }

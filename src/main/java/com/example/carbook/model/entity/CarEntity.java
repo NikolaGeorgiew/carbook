@@ -39,7 +39,7 @@ public class CarEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private FuelEnum fuel;
 
-    @Column
+    @Column(length = 1000)
     private String description;
 
     @Column

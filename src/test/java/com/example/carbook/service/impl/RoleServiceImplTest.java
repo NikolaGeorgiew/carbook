@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -19,10 +18,6 @@ public class RoleServiceImplTest {
     @Mock
     private RoleRepository roleRepository;
 
-    @InjectMocks
-    private UserServiceImpl userService;
-
-    // Replace UserRoleEntity and UserRoleEnum with the actual classes used in your service and repository
     @Test
     void testFindByRole() {
         // Create a sample UserRoleEnum
@@ -30,7 +25,6 @@ public class RoleServiceImplTest {
 
         // Create a sample UserRoleEntity
         UserRoleEntity userRoleEntity = new UserRoleEntity();
-        // Set properties on the userRoleEntity
 
         // Mock the behavior of roleRepository.findByRole
         when(roleRepository.findByRole(roleEnum)).thenReturn(userRoleEntity);
@@ -42,7 +36,6 @@ public class RoleServiceImplTest {
         verify(roleRepository).findByRole(roleEnum);
 
         // Assertions
-        // You may need to adjust this based on your actual entities and enumeration
         assertEquals(userRoleEntity, result);
     }
 }

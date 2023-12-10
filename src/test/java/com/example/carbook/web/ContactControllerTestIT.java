@@ -1,7 +1,6 @@
 package com.example.carbook.web;
 
 import com.example.carbook.model.dto.MessageDTO;
-import com.example.carbook.service.CarService;
 import com.example.carbook.service.MessageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

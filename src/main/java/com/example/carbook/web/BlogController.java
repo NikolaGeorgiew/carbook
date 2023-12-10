@@ -1,8 +1,6 @@
 package com.example.carbook.web;
 
 import com.example.carbook.model.dto.BlogSummaryDTO;
-import com.example.carbook.model.dto.CarDetailDTO;
-import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.service.BlogService;
 import com.example.carbook.service.exception.ObjectNotFoundException;
 import org.springframework.data.domain.Page;

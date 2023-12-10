@@ -1,7 +1,6 @@
 package com.example.carbook.service.impl;
 
 import com.example.carbook.model.dto.CarDetailDTO;
-import com.example.carbook.model.dto.CarDetailForPricingDTO;
 import com.example.carbook.model.dto.CarSummaryDTO;
 import com.example.carbook.model.entity.CarEntity;
 import com.example.carbook.model.enums.CarTypeEnum;
@@ -9,7 +8,6 @@ import com.example.carbook.repo.CarRepository;
 import com.example.carbook.service.CarService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

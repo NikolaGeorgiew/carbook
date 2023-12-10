@@ -32,8 +32,6 @@ public class CarServiceImplTest {
     @InjectMocks
     private CarServiceImpl carService;
 
-    // Replace CarSummaryDTO with the actual class used in your service
-    // Replace CarEntity with the actual class used in your repository
     @Test
     void testGetAllCars() {
         // Create sample data
@@ -50,10 +48,7 @@ public class CarServiceImplTest {
         Page<CarSummaryDTO> result = carService.getAllCars(Pageable.unpaged());
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
-        // and the structure of your entities and DTOs
         assertEquals(carPage.getTotalElements(), result.getTotalElements());
-        // Add more assertions as needed
     }
     @Test
     void testGetCarDetailWhenCarExists() {
@@ -69,9 +64,6 @@ public class CarServiceImplTest {
 
         // Assertions
         assertTrue(result.isPresent());
-        // You may need to adjust this based on your actual mapping logic
-        // and the structure of your entities and DTOs
-        // Example: assertEquals(expectedValue, result.get().getSomeProperty());
     }
 
     @Test
@@ -102,10 +94,7 @@ public class CarServiceImplTest {
         Page<CarSummaryDTO> result = carService.findAllByCarEnumAndIdNot(CarTypeEnum.SEDAN, 1L, Pageable.unpaged());
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
-        // and the structure of your entities and DTOs
         assertEquals(carPage.getTotalElements(), result.getTotalElements());
-        // Add more assertions as needed
     }
     @Test
     void testMapAsDetails() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -117,15 +106,10 @@ public class CarServiceImplTest {
         Method mapAsDetailsMethod = CarServiceImpl.class.getDeclaredMethod("mapAsDetails", CarEntity.class);
         mapAsDetailsMethod.setAccessible(true);  // Make the private method accessible
 
-        // Set up the carService instance with any necessary dependencies
-        // For example, you might need to initialize carService.carRepository if it is used in mapAsDetails
-        // when(carService.carRepository.someMethod()).thenReturn(someValue);
-
         // Invoke the method under test
         CarDetailDTO result = (CarDetailDTO) mapAsDetailsMethod.invoke(carService, carEntity);
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
         assertEquals(carEntity.getId(), result.id());
         assertEquals(carEntity.getImageUrl(), result.imageUrl());
         assertEquals(carEntity.getMileage(), result.mileage());
@@ -151,7 +135,6 @@ public class CarServiceImplTest {
         CarSummaryDTO result = (CarSummaryDTO) mapAsSummaryMethod.invoke(null, carEntity);
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
         assertEquals(carEntity.getId(), result.id());
         assertEquals(carEntity.getBrand(), result.brand());
         assertEquals(carEntity.getType(), result.type());

@@ -2,7 +2,6 @@ package com.example.carbook.model.dto;
 
 import jakarta.validation.constraints.Size;
 
-//TODO: DELETING
 public class UserLoginBindingModel {
 
     @Size(min = 3, max = 20, message = "Username length must be between 3 and 20 characters!")

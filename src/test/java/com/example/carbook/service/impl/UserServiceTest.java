@@ -5,7 +5,6 @@ import com.example.carbook.model.entity.UserRoleEntity;
 import com.example.carbook.model.enums.UserRoleEnum;
 import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.RoleService;
-import com.example.carbook.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

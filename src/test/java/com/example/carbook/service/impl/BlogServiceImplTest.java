@@ -30,8 +30,6 @@ public class BlogServiceImplTest {
     @InjectMocks
     private BlogServiceImpl blogService;
 
-    // Replace BlogSummaryDTO with the actual class used in your service
-    // Replace BlogEntity with the actual class used in your repository
     @Test
     void testGetAllBlogs() {
         // Create sample data
@@ -48,10 +46,8 @@ public class BlogServiceImplTest {
         Page<BlogSummaryDTO> result = blogService.getAllBlogs(Pageable.unpaged());
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
         // and the structure of your entities and DTOs
         assertEquals(blogPage.getTotalElements(), result.getTotalElements());
-        // Add more assertions as needed
     }
     @Test
     void testGetBlogDetailWhenBlogExists() {
@@ -67,9 +63,6 @@ public class BlogServiceImplTest {
 
         // Assertions
         assertTrue(result.isPresent());
-        // You may need to adjust this based on your actual mapping logic
-        // and the structure of your entities and DTOs
-        // Example: assertEquals(expectedValue, result.get().getSomeProperty());
     }
 
     @Test
@@ -99,10 +92,7 @@ public class BlogServiceImplTest {
         Page<BlogSummaryDTO> result = blogService.getAllBlogsExcludingOne(Pageable.unpaged(), 1L);
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
-        // and the structure of your entities and DTOs
         assertEquals(blogPage.getTotalElements(), result.getTotalElements());
-        // Add more assertions as needed
     }
     @Test
     void testMapAsSummary() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -118,7 +108,6 @@ public class BlogServiceImplTest {
         BlogSummaryDTO result = (BlogSummaryDTO) mapAsSummaryMethod.invoke(null, blogEntity);
 
         // Assertions
-        // You may need to adjust this based on your actual mapping logic
         assertEquals(blogEntity.getId(), result.id());
         assertEquals(blogEntity.getImageUrl(), result.imageUrl());
         assertEquals(blogEntity.getTitle(), result.title());

@@ -30,7 +30,6 @@ public class PricingControllerTestIT {
     @MockBean
     private CarService carService;
 
-    // Replace CarSummaryDTO with the actual class used in your controller
     @Test
     public void testCarsEndpoint() throws Exception {
         // Create sample data
@@ -49,11 +48,5 @@ public class PricingControllerTestIT {
                 .andExpect(MockMvcResultMatchers.view().name("pricing"))
                 .andReturn();
 
-        // You can add additional assertions based on the content of the response if needed
-        // For example, you can check if the "cars" attribute is present in the model
-
-        // Example:
-        // String content = result.getResponse().getContentAsString();
-        // assertThat(content).contains("Some expected content");
     }
 }
