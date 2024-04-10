@@ -2,19 +2,21 @@ package com.example.carbook.service.schedulers;
 
 import com.example.carbook.model.entity.UserEntity;
 import com.example.carbook.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 @Component
 public class UserCleanupTask {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    public UserCleanupTask(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Scheduled(cron = "0 0 0 * * ?") // Run every day at midnight
     public void cleanupInactiveUsers() {
