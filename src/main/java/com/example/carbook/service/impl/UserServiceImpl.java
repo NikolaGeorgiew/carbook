@@ -4,10 +4,12 @@ import com.example.carbook.model.dto.UserRegisterBindingModel;
 import com.example.carbook.model.entity.UserEntity;
 import com.example.carbook.model.entity.UserRoleEntity;
 import com.example.carbook.model.enums.UserRoleEnum;
+import com.example.carbook.model.events.UserRegisteredEvent;
 import com.example.carbook.repo.UserRepository;
 import com.example.carbook.service.RoleService;
 import com.example.carbook.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +24,15 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final ModelMapper modelMapper;
 
+    //New
+    private final ApplicationEventPublisher applicationEventPublisher;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService, ModelMapper modelMapper, ApplicationEventPublisher applicationEventPublisher) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleService = roleService;
         this.modelMapper = modelMapper;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -51,6 +56,12 @@ public class UserServiceImpl implements UserService {
         user.setRoles(List.of(userRoleEntity));
 
         userRepository.save(user);
+
+        //New
+        applicationEventPublisher.publishEvent(new UserRegisteredEvent(
+                "UserService", user.getEmail(), user.getUsername()
+        ));
+        //New
 
         return true;
     }
