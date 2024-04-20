@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
         //New
         applicationEventPublisher.publishEvent(new UserRegisteredEvent(
-                "UserService", user.getEmail()
+                "UserService", user.getEmail(), user.getUsername()
         ));
         //New
 
